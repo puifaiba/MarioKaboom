@@ -1,7 +1,7 @@
 kaboom({
   global: true,
   fullscreen: true,
-  scale: 2,
+  scale: 1.5,
   debug: true,
   clearColor: [0, 0, 0, 1],
 })
@@ -104,6 +104,13 @@ scene("game", () => {
     big(),
     origin("bot"),
   ])
+
+  player.on("headbump", (obj) => {
+    if (obj.is("coin-surprise")) {
+      gameLevel.spawn("$", obj.gridPos.sub(0, 1))
+      destroy(obj)
+    }
+  })
 
   keyDown("left", () => {
     player.move(-MOVE_SPEED, 0)

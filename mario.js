@@ -25,7 +25,7 @@ loadSprite("pipe-top-right", "hj2GK4n.png")
 loadSprite("pipe-bottom-left", "c1cYSbt.png")
 loadSprite("pipe-bottom-right", "nqQ79eI.png")
 
-scene("game", () => {
+scene("game", ({score}) => {
   layers(["bg", "obj", "ui"], "obj")
 
   const map = [
@@ -60,11 +60,11 @@ scene("game", () => {
   const gameLevel = addLevel(map, levelCfg)
 
   const scoreLabel = add([
-    text("test"),
+    text(score),
     pos(30, 6),
     layer("ui"),
     {
-      value: "test",
+      value: score,
     },
   ])
 
@@ -166,4 +166,4 @@ scene("lose", ({score}) => {
   add([text(score, 32), origin("center"), pos(width() / 2, height() / 2)])
 })
 
-start("game")
+start("game", {score: 0})

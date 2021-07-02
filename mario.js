@@ -8,7 +8,7 @@ kaboom({
 
 const MOVE_SPEED = 120
 const JUMP_FORCE = 360
-const BIG_JUMP_FORCE = 550
+const BIG_JUMP_FORCE = 450
 let CURRENT_JUMP_FORCE = JUMP_FORCE
 
 loadRoot("https://i.imgur.com/")
@@ -147,7 +147,7 @@ scene("game", () => {
 
   keyPress("space", () => {
     if (player.grounded()) {
-      player.jump(JUMP_FORCE)
+      player.jump(CURRENT_JUMP_FORCE)
     }
   })
 })

@@ -43,7 +43,7 @@ scene("game", () => {
     width: 20,
     height: 20,
     "=": [sprite("block"), solid()],
-    $: [sprite("coin")],
+    $: [sprite("coin"), "coin"],
     "%": [sprite("surprise"), solid(), "coin-surprise"],
     "*": [sprite("surprise"), solid(), "mushroom-surprise"],
     "}": [sprite("unboxed"), solid()],
@@ -120,6 +120,17 @@ scene("game", () => {
       destroy(obj)
       gameLevel.spawn("}", obj.gridPos.sub(0, 0))
     }
+  })
+
+  player.collides("mushroom", (m) => {
+    destroy(m)
+    player.biggify(5)
+  })
+
+  player.collides("coin", (c) => {
+    destroy(c)
+    scoreLabel.value++
+    scoreLabel.text = scoreLabel.value
   })
 
   keyDown("left", () => {

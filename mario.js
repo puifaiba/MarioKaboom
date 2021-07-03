@@ -31,16 +31,16 @@ scene("game", ({level, score}) => {
   layers(["bg", "obj", "ui"], "obj")
 
   const map = [
-    "                                 ",
-    "                                 ",
-    "                                 ",
-    "                                 ",
-    "                                 ",
-    "     %   =*=%=                   ",
-    "                                 ",
-    "                        -+       ",
-    "                ^   ^   ()       ",
-    "==========================  =====",
+    "                                           ",
+    "                                           ",
+    "                                           ",
+    "                                           ",
+    "                                           ",
+    "     %   =*=%=                             ",
+    "                                           ",
+    "                                -+         ",
+    "                        ^   ^   ()         ",
+    "==================================   ======",
   ]
 
   const levelCfg = {
@@ -53,8 +53,8 @@ scene("game", ({level, score}) => {
     "}": [sprite("unboxed"), solid()],
     "(": [sprite("pipe-bottom-left"), solid(), scale(0.5)],
     ")": [sprite("pipe-bottom-right"), solid(), scale(0.5)],
-    "-": [sprite("pipe-top-left"), solid(), scale(0.5)],
-    "+": [sprite("pipe-top-right"), solid(), scale(0.5)],
+    "-": [sprite("pipe-top-left"), solid(), scale(0.5), "pipe"],
+    "+": [sprite("pipe-top-right"), solid(), scale(0.5), "pipe"],
     "^": [sprite("evil-shroom"), solid(), "dangerous"],
     "#": [sprite("mushroom"), solid(), "mushroom", body()],
   }
@@ -70,7 +70,7 @@ scene("game", ({level, score}) => {
     },
   ])
 
-  add([text("level " + parseInt(level + 1)), pos(4, 6)])
+  add([text("level " + parseInt(level + 1)), pos(100, 6)])
 
   function big() {
     let timer = 0
@@ -160,11 +160,11 @@ scene("game", ({level, score}) => {
     }
   })
 
-  player.collides(() => {
-    keyPress('down', () => {
-      go('game', {
-        level: (level + 1)
-        score: scoreLabel.value
+  player.collides("pipe", () => {
+    keyPress("down", () => {
+      go("game", {
+        level: level + 1,
+        score: scoreLabel.value,
       })
     })
   })
@@ -195,4 +195,4 @@ scene("lose", ({score}) => {
   add([text(score, 32), origin("center"), pos(width() / 2, height() / 2)])
 })
 
-start("game", { level: 0, score: 0})
+start("game", {level: 0, score: 0})

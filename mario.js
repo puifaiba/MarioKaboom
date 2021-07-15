@@ -38,16 +38,16 @@ scene("game", ({level, score}) => {
 
   const maps = [
     [
-      "                                           ",
-      "                                           ",
-      "                                           ",
-      "                                           ",
-      "                                           ",
-      "     %   =*=%=                             ",
-      "                                           ",
-      "                                -+         ",
-      "                        ^   ^   ()         ",
-      "==================================   ======",
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "     %   =*=%=                              ",
+      "                                            ",
+      "                                 -+         ",
+      "                         ^   ^   ()         ",
+      "===================================   ======",
     ],
     [
       "&                                           ",
@@ -55,11 +55,23 @@ scene("game", ({level, score}) => {
       "&                                           ",
       "&                                           ",
       "&                                           ",
-      "&     @@@@@@@                    x x        ",
+      "&     @@@@@@@*                   x x        ",
       "&                              x x x        ",
       "&                            x x x x   x  -+",
       "&                z     z   x x x x x   x  ()",
       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    ],
+    [
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "                                            ",
+      "     %%  ===%=  =*                          ",
+      "                                            ",
+      "                                          -+",
+      "                         ^   ^         ^  ()",
+      "===================================   ======",
     ],
   ]
 
@@ -161,7 +173,7 @@ scene("game", ({level, score}) => {
   player.collides("coin", (c) => {
     destroy(c)
     scoreLabel.value++
-    scoreLabel.text = scoreLabel.value
+    scoreLabel.text = "score " + scoreLabel.value
   })
 
   const ENEMY_SPEED = 20
@@ -188,7 +200,7 @@ scene("game", ({level, score}) => {
   player.collides("pipe", () => {
     keyPress("down", () => {
       go("game", {
-        level: level + 1,
+        level: (level + 1) % maps.length,
         score: scoreLabel.value,
       })
     })
